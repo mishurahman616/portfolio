@@ -82,7 +82,7 @@ const Contact = () => {
                                 placeholder="Hi, I'd like to talk about..."
                             ></textarea>
                         </div>
-                        <button className="w-full  py-3 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg font-bold transition-all hover:scale-[1.02]">
+                        <button className="w-full  py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg font-bold transition-all hover:scale-[1.02]">
                             Send Message
                         </button>
                     </form>

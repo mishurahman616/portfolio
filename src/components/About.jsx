@@ -28,20 +28,37 @@ const About = () => {
             </motion.div>
 
             <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0.6 }}
+                whileInView={{ opacity: 1, scale: 0.8 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="relative aspect-square max-w-md mx-auto"
+                className="relative aspect-square max-w-xs mx-auto"
             >
-                <div className="absolute inset-0 bg-blue-600/20 rounded-3xl blur-3xl"></div>
-                <div className="relative h-full w-full rounded-3xl overflow-hidden border-2 border-white/20 dark:border-gray-800 flex items-center justify-center bg-gray-100 dark:bg-gray-900">
-                    {/* Placeholder for User Image */}
-                    <div className="text-center p-8">
-                        <div className="w-24 h-24 bg-blue-500 rounded-full mx-auto mb-4 flex items-center justify-center shadow-xl">
-                            <span className="text-3xl font-bold text-white">MR</span>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-indigo-600/20 rounded-3xl blur-3xl"></div>
+                <div className="relative h-full w-full rounded-3xl overflow-hidden border-2 border-blue-200/30 dark:border-blue-500/30 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-blue-950 dark:to-indigo-950">
+                    {/* Tech Pattern Background */}
+                    <div className="absolute inset-0 opacity-20 dark:opacity-20">
+                        <div className="absolute top-4 left-4 text-blue-600 dark:text-blue-400 font-mono text-xs">
+                            using System;<br />
+                            namespace Portfolio
                         </div>
-                        <p className="font-mono text-sm text-gray-500">System.Runtime.Profile</p>
+                        <div className="absolute bottom-4 right-4 text-white dark:text-white font-mono text-xs text-right">
+                            Software Engineer
+                        </div>
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl text-blue-500/20 dark:text-blue-400/10">
+                            &#123;&#125;
+                        </div>
+                    </div>
+
+                    {/* Profile Image */}
+                    <div className="relative h-full w-full flex items-center justify-center p-6">
+                        <div className="relative w-full h-full rounded-full overflow-hidden shadow-2xl ring-4 ring-white/50 dark:ring-gray-800/50">
+                            <img
+                                src="/portfolio/profile.jpg"
+                                alt="Mishu Rahman - Software Engineer"
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
                     </div>
                 </div>
             </motion.div>
