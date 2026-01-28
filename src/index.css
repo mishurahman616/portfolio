@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background-light: #ffffff;
+  --color-background-dark: #0a0a0a;
+  --color-primary: #3b82f6;
+  --color-primary-dark: #2563eb;
+
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@utility bento-card {
+  @apply bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 p-6 transition-all duration-300 hover:border-primary/50 hover:bg-white/10;
+}
+
+.dark .bento-card {
+  @apply bg-gray-900/40 border-gray-800 hover:border-primary/50;
+}
