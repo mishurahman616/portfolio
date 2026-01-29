@@ -1,17 +1,44 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Sun, Moon, Menu, X } from 'lucide-react'
 
 const Navbar = ({ isDarkMode, toggleDarkMode }) => {
     const [isOpen, setIsOpen] = useState(false)
+    const [activeSection, setActiveSection] = useState('hero')
 
     const navLinks = [
-        { name: 'About', href: '#about' },
-        { name: 'Skills', href: '#skills' },
-        { name: 'Experience', href: '#experience' },
-        { name: 'Education', href: '#education' },
-        { name: 'Projects', href: '#projects' },
-        { name: 'Contact', href: '#contact' },
+        { name: 'About', href: '#about', id: 'about' },
+        { name: 'Skills', href: '#skills', id: 'skills' },
+        { name: 'Experience', href: '#experience', id: 'experience' },
+        { name: 'Education', href: '#education', id: 'education' },
+        { name: 'Projects', href: '#projects', id: 'projects' },
+        { name: 'Contact', href: '#contact', id: 'contact' },
     ]
+
+    useEffect(() => {
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        }
+
+        const handleIntersect = (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setActiveSection(entry.target.id)
+                }
+            })
+        }
+
+        const observer = new IntersectionObserver(handleIntersect, observerOptions)
+
+        const sections = ['hero', 'about', 'skills', 'experience', 'education', 'projects', 'contact']
+        sections.forEach((id) => {
+            const element = document.getElementById(id)
+            if (element) observer.observe(element)
+        })
+
+        return () => observer.disconnect()
+    }, [])
 
     return (
         <nav className="fixed top-0 w-full z-50 bg-white/10 dark:bg-black/10 backdrop-blur-lg border-b border-white/10 dark:border-gray-800">
@@ -29,7 +56,10 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
                             <a
                                 key={link.name}
                                 href={link.href}
-                                className="text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-medium"
+                                className={`transition-all duration-300 font-medium ${activeSection === link.id
+                                        ? 'text-blue-500 dark:text-blue-400 scale-110'
+                                        : 'text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400'
+                                    }`}
                             >
                                 {link.name}
                             </a>
@@ -69,7 +99,10 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
                                 key={link.name}
                                 href={link.href}
                                 onClick={() => setIsOpen(false)}
-                                className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${activeSection === link.id
+                                        ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
+                                        : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                                    }`}
                             >
                                 {link.name}
                             </a>
