@@ -36,3 +36,7 @@ Thumbs.db
 # optional cache folders
 .cache
 .parcel-cache
+
+# local dev folders
+.vite/
+*.txt
