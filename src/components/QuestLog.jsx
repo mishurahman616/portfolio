@@ -28,34 +28,58 @@ const QuestLog = () => {
                 let badgeQuests = []
                 try {
                     const lcGraphqlUrl = `https://leetcode.com/graphql?query=query%20{%20matchedUser(username:%20%22mishurahman%22)%20{badges%20{%20id%20name%20shortName%20displayName%20icon%20hoverText%20creationDate%20}%20}}`
-                    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(lcGraphqlUrl)}`
-                    const lcRes = await fetch(proxyUrl)
-                    const lcWrapper = await lcRes.json()
-                    const lcData = JSON.parse(lcWrapper.contents)
 
-                    if (lcData.data && lcData.data.matchedUser && lcData.data.matchedUser.badges) {
+                    console.log('QuestLog: Fetching LeetCode badges...')
+
+                    // Attempt 1: corsproxy.io
+                    let lcData = null
+                    try {
+                        const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(lcGraphqlUrl)}`)
+                        if (res.ok) {
+                            lcData = await res.json()
+                            console.log('QuestLog: Badges fetched via corsproxy.io')
+                        }
+                    } catch (e) {
+                        console.warn('QuestLog: corsproxy.io failed, trying fallback...')
+                    }
+
+                    // Attempt 2: allorigins.win (Fallback)
+                    if (!lcData || !lcData.data) {
+                        try {
+                            const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(lcGraphqlUrl)}`
+                            const res = await fetch(proxyUrl)
+                            const wrapper = await res.json()
+                            lcData = typeof wrapper.contents === 'string' ? JSON.parse(wrapper.contents) : wrapper.contents
+                            console.log('QuestLog: Badges fetched via allorigins fallback')
+                        } catch (e) {
+                            console.error('QuestLog: All proxy attempts failed')
+                        }
+                    }
+
+                    if (lcData && lcData.data && lcData.data.matchedUser && lcData.data.matchedUser.badges) {
                         badgeQuests = lcData.data.matchedUser.badges.map(b => ({
-                            id: `badge-${b.id}`,
-                            title: b.displayName,
+                            id: `badge-${b.id || b.name}`,
+                            title: b.displayName || b.name,
                             description: b.hoverText || "Achievement earned on LeetCode.",
                             status: "completed",
                             currentDay: 1,
                             totalDays: 1,
                             type: "LeetCode Achievement",
                             color: "orange",
-                            completionDate: b.creationDate,
-                            iconUrl: b.icon.startsWith('http') ? b.icon : `https://leetcode.com${b.icon}`
+                            completionDate: b.creationDate || "Recent",
+                            iconUrl: b.icon ? (b.icon.startsWith('http') ? b.icon : `https://leetcode.com${b.icon}`) : null
                         }))
+                        console.log(`QuestLog: Parsed ${badgeQuests.length} badges`)
                     }
                 } catch (badgeErr) {
-                    console.warn('LeetCode badges fetch failed, but continuing with local data.', badgeErr)
+                    console.warn('QuestLog: Badge processing failed:', badgeErr)
                 }
 
                 // Merge and sort: Running quests first, then completed ones
                 const allQuests = [...(localData.challenges || []), ...badgeQuests].sort((a, b) => {
                     if (a.status === 'running' && b.status !== 'running') return -1
                     if (a.status !== 'running' && b.status === 'running') return 1
-                    return 0
+                    return (b.completionDate > a.completionDate) ? 1 : -1
                 })
 
                 setQuests(allQuests)
