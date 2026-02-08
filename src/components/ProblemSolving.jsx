@@ -51,20 +51,12 @@ const ProblemSolving = () => {
         show: { y: 0, opacity: 1 }
     }
 
-    const totalSolved = (stats.leetcode?.totalSolved || 0) + (stats.codeforces ? 0 : 0) // CF API user.info doesn't give total solved directly easily without separate call, using placeholder or just LC for now if CF is complex
+    const totalSolved = (stats.leetcode?.totalSolved || 0) + (stats.codeforces ? 0 : 0)
 
-    if (stats.loading) {
-        return (
-            <div className="py-20 animate-pulse">
-                <div className="h-10 bg-gray-200 dark:bg-gray-800 rounded w-1/3 mx-auto mb-12"></div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {[1, 2, 3].map(i => (
-                        <div key={i} className="h-48 bg-gray-200 dark:bg-gray-800 rounded-2xl"></div>
-                    ))}
-                </div>
-            </div>
-        )
-    }
+    // Skeleton placeholder component
+    const Skeleton = ({ className }) => (
+        <div className={`animate-pulse bg-gray-200 dark:bg-gray-800 rounded ${className}`}></div>
+    )
 
     return (
         <div id="achievements">
@@ -91,12 +83,16 @@ const ProblemSolving = () => {
                     <div className="space-y-4">
                         <div className="flex justify-between items-end">
                             <span className="text-gray-500 dark:text-gray-400">Total Solved</span>
-                            <span className="text-4xl font-bold text-primary">{stats.leetcode?.totalSolved || '500'}+</span>
+                            {stats.loading ? (
+                                <Skeleton className="h-10 w-20" />
+                            ) : (
+                                <span className="text-4xl font-bold text-primary">{stats.leetcode?.totalSolved || '500'}+</span>
+                            )}
                         </div>
                         <div className="w-full bg-gray-200 dark:bg-gray-700 h-2 rounded-full overflow-hidden">
                             <motion.div
                                 initial={{ width: 0 }}
-                                whileInView={{ width: '75%' }}
+                                whileInView={{ width: stats.loading ? '10%' : '75%' }}
                                 className="h-full bg-primary"
                             />
                         </div>
@@ -119,7 +115,16 @@ const ProblemSolving = () => {
                             <ExternalLink size={18} />
                         </a>
                     </div>
-                    {stats.leetcode ? (
+                    {stats.loading ? (
+                        <div className="space-y-4">
+                            <div className="grid grid-cols-3 gap-2">
+                                <Skeleton className="h-6 w-full" />
+                                <Skeleton className="h-6 w-full" />
+                                <Skeleton className="h-6 w-full" />
+                            </div>
+                            <Skeleton className="h-4 w-full" />
+                        </div>
+                    ) : stats.leetcode ? (
                         <div className="space-y-4">
                             <div className="grid grid-cols-3 gap-2">
                                 <div className="text-center">
@@ -141,7 +146,7 @@ const ProblemSolving = () => {
                             </div>
                         </div>
                     ) : (
-                        <div className="text-gray-500 text-sm">LeetCode stats currently unavailable.</div>
+                        <div className="text-gray-500 text-sm">{stats.error || 'LeetCode stats currently unavailable.'}</div>
                     )}
                 </motion.div>
 
@@ -158,7 +163,13 @@ const ProblemSolving = () => {
                             <ExternalLink size={18} />
                         </a>
                     </div>
-                    {stats.codeforces ? (
+                    {stats.loading ? (
+                        <div className="space-y-4">
+                            <Skeleton className="h-4 w-full" />
+                            <Skeleton className="h-4 w-full" />
+                            <Skeleton className="h-4 w-full" />
+                        </div>
+                    ) : stats.codeforces ? (
                         <div className="space-y-4">
                             <div className="flex justify-between items-center">
                                 <span className="text-sm text-gray-500">Current Rating</span>
@@ -176,7 +187,7 @@ const ProblemSolving = () => {
                             </div>
                         </div>
                     ) : (
-                        <div className="text-gray-500 text-sm">Codeforces stats currently unavailable.</div>
+                        <div className="text-gray-500 text-sm">{stats.error || 'Codeforces stats currently unavailable.'}</div>
                     )}
                 </motion.div>
 
