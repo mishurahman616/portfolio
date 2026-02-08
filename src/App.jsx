@@ -4,6 +4,7 @@ import Hero from './components/Hero'
 import About from './components/About'
 import TechStack from './components/TechStack'
 import ProblemSolving from './components/ProblemSolving'
+import QuestLog from './components/QuestLog'
 import Experience from './components/Experience'
 import Education from './components/Education'
 import Projects from './components/Projects'
@@ -41,6 +42,10 @@ function App() {
 
                 <section id="achievements" className="py-20">
                     <ProblemSolving />
+                </section>
+
+                <section id="quests" className="py-20">
+                    <QuestLog />
                 </section>
 
                 <section id="experience" className="py-20">

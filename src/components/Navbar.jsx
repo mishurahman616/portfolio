@@ -9,6 +9,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
         { name: 'About', href: '#about', id: 'about' },
         { name: 'Skills', href: '#skills', id: 'skills' },
         { name: 'Achievements', href: '#achievements', id: 'achievements' },
+        { name: 'Quests', href: '#quests', id: 'quests' },
         { name: 'Experience', href: '#experience', id: 'experience' },
         { name: 'Education', href: '#education', id: 'education' },
         { name: 'Projects', href: '#projects', id: 'projects' },
@@ -32,7 +33,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
 
         const observer = new IntersectionObserver(handleIntersect, observerOptions)
 
-        const sections = ['hero', 'about', 'skills', 'achievements', 'experience', 'education', 'projects', 'contact']
+        const sections = ['hero', 'about', 'skills', 'achievements', 'quests', 'experience', 'education', 'projects', 'contact']
         sections.forEach((id) => {
             const element = document.getElementById(id)
             if (element) observer.observe(element)
