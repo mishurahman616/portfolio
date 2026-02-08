@@ -8,6 +8,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
     const navLinks = [
         { name: 'About', href: '#about', id: 'about' },
         { name: 'Skills', href: '#skills', id: 'skills' },
+        { name: 'Achievements', href: '#achievements', id: 'achievements' },
         { name: 'Experience', href: '#experience', id: 'experience' },
         { name: 'Education', href: '#education', id: 'education' },
         { name: 'Projects', href: '#projects', id: 'projects' },
@@ -31,7 +32,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
 
         const observer = new IntersectionObserver(handleIntersect, observerOptions)
 
-        const sections = ['hero', 'about', 'skills', 'experience', 'education', 'projects', 'contact']
+        const sections = ['hero', 'about', 'skills', 'achievements', 'experience', 'education', 'projects', 'contact']
         sections.forEach((id) => {
             const element = document.getElementById(id)
             if (element) observer.observe(element)
@@ -57,8 +58,8 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
                                 key={link.name}
                                 href={link.href}
                                 className={`transition-all duration-300 font-medium ${activeSection === link.id
-                                        ? 'text-blue-500 dark:text-blue-400 scale-110'
-                                        : 'text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400'
+                                    ? 'text-blue-500 dark:text-blue-400 scale-110'
+                                    : 'text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400'
                                     }`}
                             >
                                 {link.name}
@@ -100,8 +101,8 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
                                 href={link.href}
                                 onClick={() => setIsOpen(false)}
                                 className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${activeSection === link.id
-                                        ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
-                                        : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                                    ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
+                                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                                     }`}
                             >
                                 {link.name}

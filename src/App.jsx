@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
 import TechStack from './components/TechStack'
+import ProblemSolving from './components/ProblemSolving'
 import Experience from './components/Experience'
 import Education from './components/Education'
 import Projects from './components/Projects'
@@ -36,6 +37,10 @@ function App() {
 
                 <section id="skills" className="py-20">
                     <TechStack />
+                </section>
+
+                <section id="achievements" className="py-20">
+                    <ProblemSolving />
                 </section>
 
                 <section id="experience" className="py-20">
