@@ -25,3 +25,24 @@
 .dark .bento-card {
   @apply bg-gray-900/40 border-gray-800 hover:border-primary/50;
 }
+
+@utility grid-pattern {
+  background-image: radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.1) 1px, transparent 0);
+  background-size: 30px 30px;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@utility scanline {
+  @apply absolute inset-0 w-full h-full pointer-events-none;
+  background: linear-gradient(to bottom, transparent, rgba(59, 130, 246, 0.05), transparent);
+  animation: scanline 8s linear infinite;
+}

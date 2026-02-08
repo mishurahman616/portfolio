@@ -4,34 +4,114 @@
             "id": 1,
             "title": "30 Days of LeetCode",
             "description": "Consistent problem solving to master Data Structures and Algorithms.",
+            "details": "This quest involves solving at least one medium or hard problem daily on LeetCode. Focusing on Dynamic Programming and Graphs this month.",
             "status": "running",
             "currentDay": 21,
             "totalDays": 30,
             "streak": 12,
             "type": "Coding",
-            "color": "blue"
+            "color": "blue",
+            "startDate": "2026-01-20"
         },
         {
             "id": 2,
             "title": "1 Week AI Agent Build",
             "description": "Building a fully autonomous research assistant using LLMs.",
+            "details": "Completed a multi-agent system using LangGraph that can research topics on the web and generate a 5-page report in markdown.",
             "status": "completed",
             "currentDay": 7,
             "totalDays": 7,
             "type": "AI/LLM",
             "color": "green",
-            "completionDate": "Feb 2026"
+            "completionDate": "2026-02-05",
+            "imageUrl": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800"
         },
         {
             "id": 3,
             "title": "180 Days of Pro Coding",
             "description": "Daily contribution to open source and personal projects.",
+            "details": "Maintaining a steady stream of commits to various open-source C# and React projects. Aiming for 180 days of consecutive green squares.",
             "status": "running",
             "currentDay": 45,
             "totalDays": 180,
             "streak": 45,
             "type": "Open Source",
-            "color": "purple"
+            "color": "purple",
+            "startDate": "2025-12-15"
+        },
+        {
+            "id": 4,
+            "title": "Advanced System Design Sprint",
+            "description": "Mastering high-level architecture and scalability patterns.",
+            "details": "Planning to dive deep into distributed database internals, consensus algorithms like Paxos/Raft, and eventual consistency models.",
+            "status": "upcoming",
+            "currentDay": 0,
+            "totalDays": 14,
+            "type": "Architecture",
+            "color": "orange",
+            "scheduledDate": "2026-03-01"
+        },
+        {
+            "id": 5,
+            "title": "Fullstack Cloud Deployment",
+            "description": "Dockerizing and deploying a microservices app to AWS.",
+            "details": "Setting up a CI/CD pipeline using GitHub Actions, ECR, and ECS with Fargate for a scalable .NET Core backend.",
+            "status": "upcoming",
+            "currentDay": 0,
+            "totalDays": 7,
+            "type": "DevOps",
+            "color": "blue",
+            "scheduledDate": "2026-04-15"
+        },
+        {
+            "id": 6,
+            "title": "Rust Fundamentals Sprint",
+            "description": "Learning Memory Safety and Ownership in Rust.",
+            "details": "Diving into the borrow checker, lifetimes, and systems programming patterns. Building a CLI tool for file encryption.",
+            "status": "running",
+            "currentDay": 5,
+            "totalDays": 14,
+            "streak": 5,
+            "type": "Systems",
+            "color": "orange",
+            "startDate": "2026-02-04"
+        },
+        {
+            "id": 7,
+            "title": "ASP.NET Core Security Audit",
+            "description": "Deep dive into OAuth2, OpenID Connect, and Data Protection in .NET.",
+            "details": "Implementing a custom Authorization Provider, securing sensitive data with Data Protection API, and conducting a full penetration test using OWASP ZAP on a microservices mesh.",
+            "status": "upcoming",
+            "currentDay": 0,
+            "totalDays": 21,
+            "type": ".NET Security",
+            "color": "blue",
+            "scheduledDate": "2026-05-10"
+        },
+        {
+            "id": 8,
+            "title": "Graph Algorithm Mastery",
+            "description": "Implementing complex graph theories in Java.",
+            "details": "Focusing on Network Flow, Tarjan's SCC, and heavy-light decomposition for advanced competitive programming.",
+            "status": "running",
+            "currentDay": 2,
+            "totalDays": 10,
+            "streak": 2,
+            "type": "Algorithms",
+            "color": "green",
+            "startDate": "2026-02-07"
+        },
+        {
+            "id": 9,
+            "title": "Quantum Computing 101",
+            "description": "Introduction to Qubits and Quantum Gates.",
+            "details": "Using Qiskit to build and simulate simple quantum circuits. Understanding superposition and entanglement.",
+            "status": "upcoming",
+            "currentDay": 0,
+            "totalDays": 30,
+            "type": "Quantum",
+            "color": "blue",
+            "scheduledDate": "2026-06-15"
         }
     ]
 }

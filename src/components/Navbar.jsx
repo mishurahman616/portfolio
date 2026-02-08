@@ -12,7 +12,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
         { name: 'Skills', href: '#skills', id: 'skills' },
         { name: 'Education', href: '#education', id: 'education' },
         { name: 'Achievements', href: '#achievements', id: 'achievements' },
-        { name: 'Quests', href: '#quests', id: 'quests' },
+        { name: 'Milestones', href: '#quests', id: 'quests' },
         { name: 'Contact', href: '#contact', id: 'contact' },
     ]
 

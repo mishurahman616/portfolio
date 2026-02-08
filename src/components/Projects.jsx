@@ -20,12 +20,12 @@ const Projects = () => {
             title: 'Inventory Management System',
             description: 'Web-based system with role-based access, stock tracking, and product categorization.',
             tech: ['C#', '.NET', 'NHibernate', 'SQL Server', 'Razor', 'Bootstrap'],
-            impact: 'Applied layered architecture and unit testing for maximum stability.'
+            impact: 'Applied layered systems and unit testing for maximum stability.'
         },
         {
             title: 'Online CV Builder',
-            description: 'Clean Architecture based tool for creating and sharing professional resumes with PDF export.',
-            tech: ['C#', '.NET', 'SQL Server', 'Clean Architecture'],
+            description: 'Clean systems based tool for creating and sharing professional resumes with PDF export.',
+            tech: ['C#', '.NET', 'SQL Server', 'SOLID Patterns'],
             link: 'https://github.com/mishurahman616/CVBuilder'
         }
     ]
