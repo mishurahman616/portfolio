@@ -1,0 +1,37 @@
+{
+    "challenges": [
+        {
+            "id": 1,
+            "title": "30 Days of LeetCode",
+            "description": "Consistent problem solving to master Data Structures and Algorithms.",
+            "status": "running",
+            "currentDay": 21,
+            "totalDays": 30,
+            "streak": 12,
+            "type": "Coding",
+            "color": "blue"
+        },
+        {
+            "id": 2,
+            "title": "1 Week AI Agent Build",
+            "description": "Building a fully autonomous research assistant using LLMs.",
+            "status": "completed",
+            "currentDay": 7,
+            "totalDays": 7,
+            "type": "AI/LLM",
+            "color": "green",
+            "completionDate": "Feb 2026"
+        },
+        {
+            "id": 3,
+            "title": "180 Days of Pro Coding",
+            "description": "Daily contribution to open source and personal projects.",
+            "status": "running",
+            "currentDay": 45,
+            "totalDays": 180,
+            "streak": 45,
+            "type": "Open Source",
+            "color": "purple"
+        }
+    ]
+}
