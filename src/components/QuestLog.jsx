@@ -19,31 +19,36 @@ const QuestLog = () => {
         const fetchQuests = async () => {
             try {
                 // Fetching manual challenges from public directory
-                const localResponse = await fetch(`/portfolio/data/challenges.json?t=${new Date().getTime()}`)
+                // Using BASE_URL to work correctly in both development and production
+                const baseUrl = import.meta.env.BASE_URL || '/'
+                const localResponse = await fetch(`${baseUrl}data/challenges.json?t=${new Date().getTime()}`)
                 const localData = localResponse.ok ? await localResponse.json() : { challenges: [] }
 
-                // Fetching LeetCode badges
-                const badgeResponse = await fetch('https://alfa-leetcode-api.onrender.com/mishurahman/badges')
+                // Fetching LeetCode badges - Wrapped in sub-try to prevent total failure
                 let badgeQuests = []
-
-                if (badgeResponse.ok) {
-                    const badgeData = await badgeResponse.json()
-                    badgeQuests = (badgeData.badges || []).map(b => ({
-                        id: `badge-${b.badge.name}`,
-                        title: b.badge.name,
-                        description: "Achievement earned on LeetCode.",
-                        status: "completed",
-                        currentDay: 1,
-                        totalDays: 1,
-                        type: "LeetCode Achievement",
-                        color: "orange",
-                        completionDate: b.creationDate,
-                        iconUrl: b.badge.icon.startsWith('http') ? b.badge.icon : `https://leetcode.com${b.badge.icon}`
-                    }))
+                try {
+                    const badgeResponse = await fetch('https://alfa-leetcode-api.onrender.com/mishurahman/badges')
+                    if (badgeResponse.ok) {
+                        const badgeData = await badgeResponse.json()
+                        badgeQuests = (badgeData.badges || []).map(b => ({
+                            id: `badge-${b.badge.name}`,
+                            title: b.badge.name,
+                            description: "Achievement earned on LeetCode.",
+                            status: "completed",
+                            currentDay: 1,
+                            totalDays: 1,
+                            type: "LeetCode Achievement",
+                            color: "orange",
+                            completionDate: b.creationDate,
+                            iconUrl: b.badge.icon.startsWith('http') ? b.badge.icon : `https://leetcode.com${b.badge.icon}`
+                        }))
+                    }
+                } catch (badgeErr) {
+                    console.warn('LeetCode badges fetch failed, but continuing with local data.', badgeErr)
                 }
 
-                // Merge and sort: Running quests first, then completed ones by date
-                const allQuests = [...localData.challenges, ...badgeQuests].sort((a, b) => {
+                // Merge and sort: Running quests first, then completed ones
+                const allQuests = [...(localData.challenges || []), ...badgeQuests].sort((a, b) => {
                     if (a.status === 'running' && b.status !== 'running') return -1
                     if (a.status !== 'running' && b.status === 'running') return 1
                     return 0
@@ -52,7 +57,7 @@ const QuestLog = () => {
                 setQuests(allQuests)
                 setLoading(false)
             } catch (err) {
-                console.error(err)
+                console.error('Quest Log sync error:', err)
                 setError('Could not sync with the Quest Log.')
                 setLoading(false)
             }
@@ -117,9 +122,9 @@ const QuestLog = () => {
                         >
                             <div className="flex items-start justify-between mb-4">
                                 <div className={`p-2 rounded-lg border ${quest.color === 'blue' ? 'text-blue-500 border-blue-500/20 bg-blue-500/10' :
-                                        quest.color === 'green' ? 'text-green-500 border-green-500/20 bg-green-500/10' :
-                                            quest.color === 'orange' ? 'text-orange-500 border-orange-500/20 bg-orange-500/10' :
-                                                'text-purple-500 border-purple-500/20 bg-purple-500/10'
+                                    quest.color === 'green' ? 'text-green-500 border-green-500/20 bg-green-500/10' :
+                                        quest.color === 'orange' ? 'text-orange-500 border-orange-500/20 bg-orange-500/10' :
+                                            'text-purple-500 border-purple-500/20 bg-purple-500/10'
                                     }`}>
                                     {quest.iconUrl ? (
                                         <img src={quest.iconUrl} alt={quest.title} className="w-6 h-6 object-contain" />
