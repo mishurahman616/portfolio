@@ -24,23 +24,27 @@ const QuestLog = () => {
                 const localResponse = await fetch(`${baseUrl}data/challenges.json?t=${new Date().getTime()}`)
                 const localData = localResponse.ok ? await localResponse.json() : { challenges: [] }
 
-                // Fetching LeetCode badges - Wrapped in sub-try to prevent total failure
+                // Fetching LeetCode badges from the official GraphQL endpoint
                 let badgeQuests = []
                 try {
-                    const badgeResponse = await fetch('https://alfa-leetcode-api.onrender.com/mishurahman/badges')
-                    if (badgeResponse.ok) {
-                        const badgeData = await badgeResponse.json()
-                        badgeQuests = (badgeData.badges || []).map(b => ({
-                            id: `badge-${b.badge.name}`,
-                            title: b.badge.name,
-                            description: "Achievement earned on LeetCode.",
+                    const lcGraphqlUrl = `https://leetcode.com/graphql?query=query%20{%20matchedUser(username:%20%22mishurahman%22)%20{badges%20{%20id%20name%20shortName%20displayName%20icon%20hoverText%20creationDate%20}%20}}`
+                    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(lcGraphqlUrl)}`
+                    const lcRes = await fetch(proxyUrl)
+                    const lcWrapper = await lcRes.json()
+                    const lcData = JSON.parse(lcWrapper.contents)
+
+                    if (lcData.data && lcData.data.matchedUser && lcData.data.matchedUser.badges) {
+                        badgeQuests = lcData.data.matchedUser.badges.map(b => ({
+                            id: `badge-${b.id}`,
+                            title: b.displayName,
+                            description: b.hoverText || "Achievement earned on LeetCode.",
                             status: "completed",
                             currentDay: 1,
                             totalDays: 1,
                             type: "LeetCode Achievement",
                             color: "orange",
                             completionDate: b.creationDate,
-                            iconUrl: b.badge.icon.startsWith('http') ? b.badge.icon : `https://leetcode.com${b.badge.icon}`
+                            iconUrl: b.icon.startsWith('http') ? b.icon : `https://leetcode.com${b.icon}`
                         }))
                     }
                 } catch (badgeErr) {

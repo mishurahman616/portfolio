@@ -13,9 +13,16 @@ const ProblemSolving = () => {
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                // Fetch LeetCode stats
+                // Fetch LeetCode stats (Solved count)
                 const leetcodeRes = await fetch('https://leetcode-stats-api.herokuapp.com/mishurahman')
                 const leetcodeData = await leetcodeRes.json()
+
+                // Fetch LeetCode Contest Stats (Ranking, Rating) via GraphQL + Proxy
+                const lcGraphqlUrl = `https://leetcode.com/graphql?query=query%20{%20userContestRanking(username:%20%22mishurahman%22)%20{%20attendedContestsCount%20rating%20globalRanking%20totalParticipants%20topPercentage%20}%20}`
+                const lcProxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(lcGraphqlUrl)}`
+                const lcRes = await fetch(lcProxyUrl)
+                const lcWrapper = await lcRes.json()
+                const lcContestData = JSON.parse(lcWrapper.contents)
 
                 // Fetch Codeforces stats via a CORS proxy
                 const cfUrl = encodeURIComponent('https://codeforces.com/api/user.info?handles=mishurahman')
@@ -24,7 +31,10 @@ const ProblemSolving = () => {
                 const cfData = JSON.parse(cfWrapper.contents)
 
                 setStats({
-                    leetcode: leetcodeData,
+                    leetcode: {
+                        ...leetcodeData,
+                        contest: lcContestData.data?.userContestRanking || null
+                    },
                     codeforces: cfData.status === 'OK' ? cfData.result[0] : null,
                     loading: false,
                     error: null
@@ -140,9 +150,23 @@ const ProblemSolving = () => {
                                     <div className="text-[10px] uppercase tracking-wider text-gray-500">Hard</div>
                                 </div>
                             </div>
-                            <div className="flex justify-between items-center pt-2 border-t border-gray-100 dark:border-gray-800">
-                                <span className="text-sm text-gray-500">Global Rank</span>
-                                <span className="font-mono text-primary">#{stats.leetcode.ranking?.toLocaleString()}</span>
+
+                            {stats.leetcode.contest && (
+                                <div className="flex justify-between items-center py-2 border-y border-gray-100 dark:border-gray-800">
+                                    <div className="text-xs text-gray-500">
+                                        Rating <span className="font-bold text-orange-500 ml-1">{Math.floor(stats.leetcode.contest.rating)}</span>
+                                    </div>
+                                    <div className="text-[10px] bg-orange-500/10 text-orange-500 px-2 py-0.5 rounded-full font-bold">
+                                        Top {stats.leetcode.contest.topPercentage}%
+                                    </div>
+                                </div>
+                            )}
+
+                            <div className="flex justify-between items-center text-sm pt-2">
+                                <span className="text-gray-500">Global Rank</span>
+                                <span className="font-mono text-primary">
+                                    #{(stats.leetcode.contest?.globalRanking || stats.leetcode.ranking)?.toLocaleString()}
+                                </span>
                             </div>
                         </div>
                     ) : (
