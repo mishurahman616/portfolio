@@ -36,8 +36,20 @@ function App() {
                     <About />
                 </section>
 
+                <section id="experience" className="py-20">
+                    <Experience />
+                </section>
+
+                <section id="projects" className="py-20">
+                    <Projects />
+                </section>
+
                 <section id="skills" className="py-20">
                     <TechStack />
+                </section>
+
+                <section id="education" className="py-20">
+                    <Education />
                 </section>
 
                 <section id="achievements" className="py-20">
@@ -46,18 +58,6 @@ function App() {
 
                 <section id="quests" className="py-20">
                     <QuestLog />
-                </section>
-
-                <section id="experience" className="py-20">
-                    <Experience />
-                </section>
-
-                <section id="education" className="py-20">
-                    <Education />
-                </section>
-
-                <section id="projects" className="py-20">
-                    <Projects />
                 </section>
 
                 <section id="contact" className="py-20">
