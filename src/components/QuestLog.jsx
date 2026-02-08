@@ -18,11 +18,38 @@ const QuestLog = () => {
     useEffect(() => {
         const fetchQuests = async () => {
             try {
-                // Fetching from public directory with a cache-buster query
-                const response = await fetch(`/portfolio/data/challenges.json?t=${new Date().getTime()}`)
-                if (!response.ok) throw new Error('Failed to load Quest Log')
-                const data = await response.json()
-                setQuests(data.challenges)
+                // Fetching manual challenges from public directory
+                const localResponse = await fetch(`/portfolio/data/challenges.json?t=${new Date().getTime()}`)
+                const localData = localResponse.ok ? await localResponse.json() : { challenges: [] }
+
+                // Fetching LeetCode badges
+                const badgeResponse = await fetch('https://alfa-leetcode-api.onrender.com/mishurahman/badges')
+                let badgeQuests = []
+
+                if (badgeResponse.ok) {
+                    const badgeData = await badgeResponse.json()
+                    badgeQuests = (badgeData.badges || []).map(b => ({
+                        id: `badge-${b.badge.name}`,
+                        title: b.badge.name,
+                        description: "Achievement earned on LeetCode.",
+                        status: "completed",
+                        currentDay: 1,
+                        totalDays: 1,
+                        type: "LeetCode Achievement",
+                        color: "orange",
+                        completionDate: b.creationDate,
+                        iconUrl: b.badge.icon.startsWith('http') ? b.badge.icon : `https://leetcode.com${b.badge.icon}`
+                    }))
+                }
+
+                // Merge and sort: Running quests first, then completed ones by date
+                const allQuests = [...localData.challenges, ...badgeQuests].sort((a, b) => {
+                    if (a.status === 'running' && b.status !== 'running') return -1
+                    if (a.status !== 'running' && b.status === 'running') return 1
+                    return 0
+                })
+
+                setQuests(allQuests)
                 setLoading(false)
             } catch (err) {
                 console.error(err)
@@ -84,12 +111,23 @@ const QuestLog = () => {
                             key={quest.id}
                             variants={item}
                             className={`bento-card relative group overflow-hidden ${quest.status === 'running'
-                                    ? 'border-primary/30 bg-primary/5'
-                                    : 'opacity-80'
+                                ? 'border-primary/30 bg-primary/5'
+                                : 'opacity-80'
                                 }`}
                         >
-                            {/* Status Badge */}
-                            <div className="absolute top-4 right-4 focus:outline-none">
+                            <div className="flex items-start justify-between mb-4">
+                                <div className={`p-2 rounded-lg border ${quest.color === 'blue' ? 'text-blue-500 border-blue-500/20 bg-blue-500/10' :
+                                        quest.color === 'green' ? 'text-green-500 border-green-500/20 bg-green-500/10' :
+                                            quest.color === 'orange' ? 'text-orange-500 border-orange-500/20 bg-orange-500/10' :
+                                                'text-purple-500 border-purple-500/20 bg-purple-500/10'
+                                    }`}>
+                                    {quest.iconUrl ? (
+                                        <img src={quest.iconUrl} alt={quest.title} className="w-6 h-6 object-contain" />
+                                    ) : (
+                                        <span className="text-[10px] font-mono px-1">{quest.type}</span>
+                                    )}
+                                </div>
+
                                 {quest.status === 'running' ? (
                                     <span className="flex items-center gap-1 text-[10px] uppercase font-bold text-primary animate-pulse">
                                         <Timer size={12} /> Active
@@ -101,15 +139,6 @@ const QuestLog = () => {
                                 )}
                             </div>
 
-                            <div className="mb-4">
-                                <span className={`text-[10px] font-mono px-2 py-1 rounded-md border ${quest.color === 'blue' ? 'text-blue-500 border-blue-500/20 bg-blue-500/10' :
-                                        quest.color === 'green' ? 'text-green-500 border-green-500/20 bg-green-500/10' :
-                                            'text-purple-500 border-purple-500/20 bg-purple-500/10'
-                                    }`}>
-                                    {quest.type}
-                                </span>
-                            </div>
-
                             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
                                 {quest.title}
                             </h3>
@@ -119,36 +148,39 @@ const QuestLog = () => {
                             </p>
 
                             <div className="space-y-4">
-                                <div className="flex justify-between items-end text-sm">
-                                    <span className="text-gray-500">Progress</span>
-                                    <span className="font-bold text-gray-900 dark:text-white">
-                                        {quest.currentDay}/{quest.totalDays} Days
-                                    </span>
-                                </div>
-                                <div className="w-full bg-gray-200 dark:bg-gray-800 h-2 rounded-full overflow-hidden">
-                                    <motion.div
-                                        initial={{ width: 0 }}
-                                        whileInView={{ width: `${(quest.currentDay / quest.totalDays) * 100}%` }}
-                                        transition={{ duration: 1, ease: "easeOut" }}
-                                        className={`h-full ${quest.status === 'running' ? 'bg-primary' : 'bg-green-500'
-                                            }`}
-                                    />
-                                </div>
-
-                                {quest.status === 'running' && (
-                                    <div className="flex items-center gap-2 text-orange-500">
-                                        <Flame size={16} fill="currentColor" />
-                                        <span className="text-xs font-bold font-mono">
-                                            {quest.streak} DAY STREAK
-                                        </span>
-                                    </div>
-                                )}
-
-                                {quest.status === 'completed' && (
-                                    <div className="flex items-center gap-2 text-green-500">
-                                        <Trophy size={16} />
-                                        <span className="text-xs font-bold uppercase tracking-wider">
-                                            Completed {quest.completionDate}
+                                {quest.status === 'running' ? (
+                                    <>
+                                        <div className="flex justify-between items-end text-sm">
+                                            <span className="text-gray-500">Progress</span>
+                                            <span className="font-bold text-gray-900 dark:text-white">
+                                                {quest.currentDay}/{quest.totalDays} Days
+                                            </span>
+                                        </div>
+                                        <div className="w-full bg-gray-200 dark:bg-gray-800 h-2 rounded-full overflow-hidden">
+                                            <motion.div
+                                                initial={{ width: 0 }}
+                                                whileInView={{ width: `${(quest.currentDay / quest.totalDays) * 100}%` }}
+                                                transition={{ duration: 1, ease: "easeOut" }}
+                                                className="h-full bg-primary"
+                                            />
+                                        </div>
+                                        <div className="flex items-center gap-2 text-orange-500">
+                                            <Flame size={16} fill="currentColor" />
+                                            <span className="text-xs font-bold font-mono">
+                                                {quest.streak} DAY STREAK
+                                            </span>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <div className="flex items-center justify-between pt-2 border-t border-gray-100 dark:border-gray-800">
+                                        <div className="flex items-center gap-2 text-green-500">
+                                            <Trophy size={16} />
+                                            <span className="text-xs font-bold uppercase tracking-wider">
+                                                Conquered
+                                            </span>
+                                        </div>
+                                        <span className="text-[10px] text-gray-400 font-mono">
+                                            {quest.completionDate}
                                         </span>
                                     </div>
                                 )}
