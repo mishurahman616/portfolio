@@ -19,7 +19,7 @@ const Hero = () => {
     }, []);
 
     const stats = [
-        { label: "Engineering", value: "3+ Years", icon: Cpu },
+        { label: "Engineering", value: "2+ Years", icon: Cpu },
         { label: "Systems Built", value: "10+", icon: Code2 },
         { label: "Impact", value: "Scalable", icon: Coffee },
     ];
