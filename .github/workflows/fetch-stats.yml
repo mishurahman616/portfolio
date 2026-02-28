@@ -33,8 +33,7 @@ jobs:
             https://leetcode.com/graphql -o public/data/stats_lc_graphql.json || echo '{}' > public/data/stats_lc_graphql.json
 
       - name: Merge into single stats.json
-        run: |
-          python - <<'PY'
+        run: python3 << 'EOF'
 import json
 def load(path):
     try:
@@ -42,7 +41,6 @@ def load(path):
             return json.load(f)
     except Exception:
         return None
-
 cf = load('public/data/stats_cf.json')
 lc = load('public/data/stats_lc.json')
 lcg = load('public/data/stats_lc_graphql.json')
@@ -50,7 +48,7 @@ out = { 'codeforces': cf, 'leetcode_api': lc, 'leetcode_graph': lcg }
 with open('public/data/stats.json','w') as f:
     json.dump(out, f, indent=2)
 print('Wrote public/data/stats.json')
-PY
+EOF
 
       - name: Commit and push cached data
         env:
