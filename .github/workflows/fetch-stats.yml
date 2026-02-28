@@ -28,8 +28,9 @@ jobs:
       - name: Fetch LeetCode GraphQL (contest/badges)
         run: |
           mkdir -p public/data
-          graphql='{"query":"query { userContestRanking(username: \"mishurahman\") { attendedContestsCount rating globalRanking totalParticipants topPercentage } }"}'
-          curl -s -H "Content-Type: application/json" -d "$graphql" https://leetcode.com/graphql -o public/data/stats_lc_graphql.json || echo '{}' > public/data/stats_lc_graphql.json
+          curl -s -X POST -H "Content-Type: application/json" \
+            -d '{"query":"query { userContestRanking(username: \"mishurahman\") { attendedContestsCount rating globalRanking totalParticipants topPercentage } }"}' \
+            https://leetcode.com/graphql -o public/data/stats_lc_graphql.json || echo '{}' > public/data/stats_lc_graphql.json
 
       - name: Merge into single stats.json
         run: |
