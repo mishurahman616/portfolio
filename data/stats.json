@@ -1,0 +1,35 @@
+{
+  "codeforces": {
+    "status": "OK",
+    "result": [
+      {
+        "handle": "mishurahman",
+        "rating": 1200,
+        "maxRating": 1400,
+        "rank": "expert"
+      }
+    ]
+  },
+  "leetcode_api": {
+    "totalSolved": 500,
+    "totalQuestions": 3000,
+    "easySolved": 150,
+    "mediumSolved": 250,
+    "hardSolved": 100,
+    "ranking": 50000,
+    "recentSubmissionList": []
+  },
+  "leetcode_graph": {
+    "data": {
+      "userContestRanking": {
+        "attendedContestsCount": 25,
+        "rating": 1650,
+        "globalRanking": 5000,
+        "totalParticipants": 500000,
+        "topPercentage": 5.5
+      }
+    }
+  },
+  "updatedAt": "2026-02-28T00:00:00Z",
+  "note": "This file is updated every 6 hours by GitHub Actions. Feel free to edit manually if needed."
+}
