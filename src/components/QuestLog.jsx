@@ -44,8 +44,9 @@ const QuestLog = () => {
         try {
             // 1. Local Challenges - Multi-path strategy
             let localChallenges = [];
+            const base = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/')
             const pathsToTry = [
-                `${import.meta.env.BASE_URL || '/'}data/challenges.json`,
+                `${base}data/challenges.json`,
                 '/portfolio/data/challenges.json',
                 '/data/challenges.json',
                 'data/challenges.json'
