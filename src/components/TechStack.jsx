@@ -14,7 +14,7 @@ import {
 const TechStack = () => {
     const skills = [
         { title: 'Core Ecosystem', items: ['C#', '.NET 8', 'ASP.NET Core', 'EF Core'], icon: <Code2 className="text-blue-500" /> },
-        { title: 'Data & Caching', items: ['SQL Server', 'MongoDB', 'Redis', 'ClickHouse'], icon: <Database className="text-yellow-500" /> },
+        { title: 'Data & Caching', items: ['SQL Server', 'MongoDB', 'Redis', 'SingleStoreDB', 'Apache Pinot'], icon: <Database className="text-yellow-500" /> },
         { title: 'Message Brokers', items: ['Kafka', 'Redis Streams'], icon: <Workflow className="text-orange-500" /> },
         { title: 'DevOps & Cloud', items: ['Docker', 'AWS', 'CI/CD Pipelines'], icon: <Cloud className="text-cyan-500" /> },
         { title: 'Observability', items: ['Application Insights', 'OpenTelemetry'], icon: <Cpu className="text-green-500" /> },
@@ -54,7 +54,7 @@ const TechStack = () => {
                     >
                         <div className="flex items-center gap-3 mb-4">
                             {skill.icon}
-                            <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">
+                            <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider group-hover:text-primary transition-colors">
                                 {skill.title}
                             </h3>
                         </div>
@@ -62,7 +62,7 @@ const TechStack = () => {
                             {skill.items.map((it, i) => (
                                 <span
                                     key={i}
-                                    className="px-2 py-1 text-xs font-mono bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-md border border-gray-200 dark:border-gray-700"
+                                    className="px-3 py-1.5 text-sm font-bold bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-md border border-blue-100 dark:border-blue-800/30 shadow-sm"
                                 >
                                     {it}
                                 </span>

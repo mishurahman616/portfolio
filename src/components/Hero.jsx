@@ -21,7 +21,7 @@ const Hero = () => {
 
     const stats = [
         { label: "Experience", value: `${getYearsOfExperience()}+ Years`, icon: Cpu },
-        { label: "Focus", value: "Modernization", icon: Code2 },
+        { label: "Focus", value: "System Design", icon: Code2 },
         { label: "Impact", value: "Scalable APIs", icon: Coffee },
     ];
 
@@ -32,7 +32,7 @@ const Hero = () => {
             <div className="scanline" />
 
             {/* Animated Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] max-w-[500px] aspect-square bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -55,7 +55,7 @@ const Hero = () => {
                     <span className="font-mono text-gray-500 text-lg md:text-xl">const </span>
                     <span className="font-mono text-blue-600 dark:text-blue-400 text-lg md:text-xl">SoftwareEngineer</span>
                     <span className="font-mono text-gray-500 text-lg md:text-xl"> = </span>
-                    <h1 className="text-5xl md:text-8xl font-black tracking-tight text-gray-900 dark:text-white mt-2">
+                    <h1 className="text-4xl md:text-6xl font-black tracking-tight text-gray-900 dark:text-white mt-2">
                         "Mishu Rahman"
                     </h1>
                 </div>

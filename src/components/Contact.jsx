@@ -43,10 +43,10 @@ const Contact = () => {
         try {
             // EmailJS credentials
             const result = await emailjs.sendForm(
-                'service_9sl82lt',      // EmailJS Service ID
-                'template_t7qfwrc',     // EmailJS Template ID
+                import.meta.env.VITE_EMAILJS_SERVICE_ID,
+                import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
                 formRef.current,
-                'NfWtOA_y46XAEm9SF'     // EmailJS Public Key
+                import.meta.env.VITE_EMAILJS_PUBLIC_KEY
             )
 
             setStatus({
