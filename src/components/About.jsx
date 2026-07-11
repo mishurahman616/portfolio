@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { getYearsOfExperience } from '../utils/dateUtils'
 
 const About = () => {
     return (
@@ -13,16 +14,13 @@ const About = () => {
                 <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">About Me</h2>
                 <div className="space-y-4 text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
                     <p>
-                        I am a Software Engineer based in Dhaka, Bangladesh, with a strong focus on C# and .NET technologies.
-                        I am passionate about building scalable, maintainable, and high-performance applications.
+                        As a .NET developer with over {getYearsOfExperience()} years of experience, I've moved beyond just writing code to focusing on system architecture and performance. I am based in Dhaka, Bangladesh, and specialize in building resilient backend ecosystems.
                     </p>
                     <p>
-                        Specialized in modernizing legacy ASP.NET projects to .NET Core, I enjoy the challenge of
-                        optimizing performance and improving architectural patterns using SOLID principles and Design Patterns.
+                        I have a proven track record of rescuing legacy ASP.NET applications, modernizing them to .NET 8, and introducing distributed system patterns using tools like Redis and Kafka.
                     </p>
                     <p>
-                        My experience spans from working with traditional SQL databases like SQL Server to modern
-                        high-performance data stores like Redis, SingleStoreDB, and ClickHouse.
+                        I enjoy bridging the gap between traditional relational databases like SQL Server and high-performance data stores like MongoDB and ClickHouse to build highly scalable APIs.
                     </p>
                 </div>
             </motion.div>

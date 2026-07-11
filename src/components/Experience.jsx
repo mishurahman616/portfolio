@@ -9,10 +9,10 @@ const Experience = () => {
             role: 'Assistant Software Engineer',
             period: '03/2024 – Present',
             description: [
-                'Modernizing legacy .NET Framework applications to .NET 8, improving performance and maintainability.',
-                'Designed applications using OOP, SOLID principles, and patterns like Repository, Factory, Strategy.',
-                'Optimized performance using Redis, MongoDB, SingleStoreDB, and Apache Pinot.',
-                'Participated in Agile/Scrum environment and wrote unit tests using xUnit and Moq.'
+                'Spearheaded the migration of legacy monolithic .NET Framework APIs to .NET 8, significantly reducing response times and server resource usage.',
+                'Designed high-throughput data pipelines and implemented caching strategies using Redis and MongoDB to handle high traffic loads.',
+                'Architected applications using OOP, SOLID principles, and clean architecture patterns (Repository, Factory, Strategy).',
+                'Participated in Agile/Scrum environment and wrote unit tests using xUnit and Moq to ensure system reliability.'
             ]
         },
         {
@@ -20,9 +20,9 @@ const Experience = () => {
             role: 'Software Engineer Intern',
             period: '12/2023 – 02/2024',
             description: [
-                'Produced clean, efficient code based on specifications.',
-                'Tested and deployed programs and systems.',
-                'Identified and fixed bugs in existing software.'
+                'Developed and maintained features for enterprise applications using C# and ASP.NET.',
+                'Resolved critical bugs and optimized existing systems to improve overall stability.',
+                'Collaborated with senior engineers to test and deploy robust software solutions.'
             ]
         }
     ]

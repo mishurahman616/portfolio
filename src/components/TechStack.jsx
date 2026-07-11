@@ -13,14 +13,14 @@ import {
 
 const TechStack = () => {
     const skills = [
-        { title: 'Languages', items: ['C#', 'JavaScript', 'SQL'], icon: <Code2 className="text-blue-500" /> },
-        { title: 'Frameworks', items: ['ASP.NET Core', 'EF Core', 'React', 'JQuery'], icon: <Server className="text-purple-500" /> },
-        { title: 'Databases', items: ['SQL Server', 'MongoDB', 'Redis', 'ClickHouse'], icon: <Database className="text-yellow-500" /> },
-        { title: 'Infras/DevOps', items: ['Docker', 'AWS (EC2, S3, SQS)', 'CI/CD'], icon: <Cloud className="text-cyan-500" /> },
-        { title: 'Messaging', items: ['Kafka', 'Redis Streams'], icon: <Workflow className="text-orange-500" /> },
-        { title: 'Monitoring', items: ['Application Insights', 'OpenTelemetry'], icon: <Cpu className="text-green-500" /> },
+        { title: 'Core Ecosystem', items: ['C#', '.NET 8', 'ASP.NET Core', 'EF Core'], icon: <Code2 className="text-blue-500" /> },
+        { title: 'Data & Caching', items: ['SQL Server', 'MongoDB', 'Redis', 'ClickHouse'], icon: <Database className="text-yellow-500" /> },
+        { title: 'Message Brokers', items: ['Kafka', 'Redis Streams'], icon: <Workflow className="text-orange-500" /> },
+        { title: 'DevOps & Cloud', items: ['Docker', 'AWS', 'CI/CD Pipelines'], icon: <Cloud className="text-cyan-500" /> },
+        { title: 'Observability', items: ['Application Insights', 'OpenTelemetry'], icon: <Cpu className="text-green-500" /> },
         { title: 'Testing', items: ['xUnit', 'Moq', 'NSubstitute'], icon: <ShieldCheck className="text-red-500" /> },
-        { title: 'Other', items: ['Git', 'Agile/Scrum', 'Design Patterns'], icon: <Terminal className="text-gray-500" /> },
+        { title: 'Frontend', items: ['JavaScript', 'React', 'Tailwind CSS'], icon: <Server className="text-purple-500" /> },
+        { title: 'Architecture', items: ['Microservices', 'SOLID', 'Design Patterns'], icon: <Terminal className="text-gray-500" /> },
     ]
 
     const container = {

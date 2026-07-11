@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Github, Linkedin, Terminal, Code2, Cpu, Coffee } from 'lucide-react'
+import { getYearsOfExperience } from '../utils/dateUtils'
 
 const Hero = () => {
     const roles = [
-        "Software Engineer",
-        ".NET Specialist",
+        "Backend Systems Engineer",
+        "Performance Optimizer",
         "Excellent Debugger",
-        "Always Learning"
+        "Distributed Systems Builder"
     ];
     const [roleIndex, setRoleIndex] = useState(0);
 
@@ -19,9 +20,9 @@ const Hero = () => {
     }, []);
 
     const stats = [
-        { label: "Engineering", value: "2+ Years", icon: Cpu },
-        { label: "Systems Built", value: "10+", icon: Code2 },
-        { label: "Impact", value: "Scalable", icon: Coffee },
+        { label: "Experience", value: `${getYearsOfExperience()}+ Years`, icon: Cpu },
+        { label: "Focus", value: "Modernization", icon: Code2 },
+        { label: "Impact", value: "Scalable APIs", icon: Coffee },
     ];
 
     return (
